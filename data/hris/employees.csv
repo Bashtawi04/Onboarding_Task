@@ -1,0 +1,101 @@
+employee_id,full_name_en,full_name_ar,gender,nationality,department,job_title,grade,location,hire_date,manager_id,contract_type,work_email,language_pref
+E1001,Lakshmi Varma,,F,Indian,Executive Office,Chief Executive Officer,10,Doha HQ,2018-12-17,,Unlimited,lakshmi.varma@aldana-group.example,en
+E1002,Liza Dela Cruz,,F,Filipino,Executive Office,Executive Assistant,3,Doha HQ,2013-03-10,E1001,Unlimited,liza.dela.cruz@aldana-group.example,en
+E1003,Asif Raza,,M,Pakistani,Operations & Maintenance,Head of Operations,9,Doha HQ,2024-05-28,E1001,Unlimited,asif.raza@aldana-group.example,en
+E1004,Nilmini Perera,,F,Sri Lankan,Operations & Maintenance,Senior Operations Manager,8,Doha HQ,2023-11-26,E1003,Unlimited,nilmini.perera@aldana-group.example,en
+E1005,Mahmoud Idris,محمود إدريس,M,Sudanese,Operations & Maintenance,Operations Manager,7,Ras Laffan Site,2020-03-29,E1004,Unlimited,mahmoud.idris@aldana-group.example,ar
+E1006,Yousef Darwish,يوسف درويش,M,Lebanese,Operations & Maintenance,Operations Manager,7,Mesaieed Site,2014-08-27,E1004,Unlimited,yousef.darwish@aldana-group.example,en
+E1007,Yousef Al-Marri,يوسف المري,M,Qatari,Operations & Maintenance,Senior Maintenance Engineer,6,Ras Laffan Site,2018-11-06,E1006,Unlimited,yousef.almarri@aldana-group.example,en
+E1008,Khalid Al-Mohannadi,خالد المهندي,M,Qatari,Operations & Maintenance,Senior Maintenance Engineer,6,Doha HQ,2019-10-31,E1006,Unlimited,khalid.almohannadi@aldana-group.example,en
+E1009,Suresh Sharma,,M,Indian,Operations & Maintenance,Senior Maintenance Engineer,6,Ras Laffan Site,2016-02-22,E1005,Unlimited,suresh.sharma@aldana-group.example,en
+E1010,Sami Al-Obaidli,سامي العبيدلي,M,Qatari,Operations & Maintenance,Maintenance Engineer,5,Doha HQ,2025-08-26,E1008,Unlimited,sami.alobaidli@aldana-group.example,both
+E1011,Khalid Taha,خالد طه,M,Sudanese,Operations & Maintenance,Maintenance Engineer,5,Ras Laffan Site,2012-11-26,E1007,Unlimited,khalid.taha@aldana-group.example,en
+E1012,Sunil Fernando,,M,Sri Lankan,Operations & Maintenance,Maintenance Engineer,5,Ras Laffan Site,2016-05-24,E1008,Unlimited,sunil.fernando@aldana-group.example,en
+E1013,Imran Qureshi,,M,Pakistani,Operations & Maintenance,Maintenance Engineer,5,Mesaieed Site,2013-05-22,E1009,Unlimited,imran.qureshi@aldana-group.example,en
+E1014,Vikram Varma,,M,Indian,Operations & Maintenance,Maintenance Engineer,5,Doha HQ,2021-09-29,E1008,Unlimited,vikram.varma@aldana-group.example,en
+E1015,Anjali Menon,,F,Indian,Operations & Maintenance,Maintenance Supervisor,4,Ras Laffan Site,2017-10-12,E1010,Unlimited,anjali.menon@aldana-group.example,en
+E1016,Prakash Karki,,M,Nepali,Operations & Maintenance,Maintenance Supervisor,4,Ras Laffan Site,2015-02-08,E1014,Unlimited,prakash.karki@aldana-group.example,en
+E1017,Mahmoud Al-Khulaifi,محمود الخليفي,M,Qatari,Operations & Maintenance,Maintenance Supervisor,4,Ras Laffan Site,2020-11-17,E1012,Unlimited,mahmoud.alkhulaifi@aldana-group.example,en
+E1018,Yousef Al-Naimi,يوسف النعيمي,M,Qatari,Operations & Maintenance,Maintenance Supervisor,4,Ras Laffan Site,2026-07-22,E1011,Unlimited,yousef.alnaimi@aldana-group.example,both
+E1019,Bikash Karki,,M,Nepali,Operations & Maintenance,Maintenance Supervisor,4,Ras Laffan Site,2018-12-18,E1010,Limited (3 years),bikash.karki@aldana-group.example,en
+E1020,Jerome Mendoza,,M,Filipino,Operations & Maintenance,Maintenance Supervisor,4,Ras Laffan Site,2025-01-02,E1011,Unlimited,jerome.mendoza@aldana-group.example,en
+E1021,Bikash Fernando,,M,Nepali,Operations & Maintenance,Senior Technician,3,Mesaieed Site,2020-03-12,E1019,Limited (3 years),bikash.fernando@aldana-group.example,en
+E1022,Prakash Gurung,,M,Sri Lankan,Operations & Maintenance,Senior Technician,3,Mesaieed Site,2014-06-08,E1019,Unlimited,prakash.gurung@aldana-group.example,en
+E1023,Hind Al-Hajri,هند الهاجري,F,Qatari,Operations & Maintenance,Senior Technician,3,Ras Laffan Site,2023-06-25,E1015,Limited (3 years),hind.alhajri@aldana-group.example,both
+E1024,Omar Barakat,عمر بركات,M,Syrian,Operations & Maintenance,Senior Technician,3,Ras Laffan Site,2020-10-12,E1015,Limited (3 years),omar.barakat@aldana-group.example,ar
+E1025,Abdulla Awad,عبدالله عوض,M,Jordanian,Operations & Maintenance,Senior Technician,3,Mesaieed Site,2021-07-27,E1017,Limited (3 years),abdulla.awad@aldana-group.example,both
+E1026,Aisha Taha,عائشة طه,F,Sudanese,Operations & Maintenance,Senior Technician,3,Ras Laffan Site,2026-02-15,E1015,Unlimited,aisha.taha@aldana-group.example,both
+E1027,Deepa Kumar,,F,Indian,Operations & Maintenance,Maintenance Technician,2,Mesaieed Site,2021-06-20,E1026,Unlimited,deepa.kumar@aldana-group.example,en
+E1028,Zubair Hussain,,M,Pakistani,Operations & Maintenance,Maintenance Technician,2,Mesaieed Site,2023-10-19,E1025,Unlimited,zubair.hussain@aldana-group.example,en
+E1029,Joel Mendoza,,M,Filipino,Operations & Maintenance,Maintenance Technician,2,Mesaieed Site,2026-05-19,E1022,Unlimited,joel.mendoza@aldana-group.example,en
+E1030,Yousef Darwish,يوسف درويش,M,Jordanian,Operations & Maintenance,Maintenance Technician,2,Mesaieed Site,2020-02-05,E1024,Unlimited,yousef.darwish2@aldana-group.example,ar
+E1031,Ahmed Mahgoub,أحمد محجوب,M,Sudanese,Operations & Maintenance,Maintenance Technician,2,Mesaieed Site,2026-01-18,E1026,Unlimited,ahmed.mahgoub@aldana-group.example,both
+E1032,Tariq Al-Khulaifi,طارق الخليفي,M,Qatari,Operations & Maintenance,Maintenance Technician,2,Mesaieed Site,2018-10-15,E1025,Unlimited,tariq.alkhulaifi@aldana-group.example,both
+E1033,Nasser Haddad,ناصر حداد,M,Palestinian,Operations & Maintenance,Maintenance Helper,1,Ras Laffan Site,2021-07-04,E1031,Unlimited,nasser.haddad@aldana-group.example,both
+E1034,Sunil Perera,,M,Nepali,Operations & Maintenance,Maintenance Helper,1,Ras Laffan Site,2013-03-14,E1031,Limited (3 years),sunil.perera@aldana-group.example,en
+E1035,Faisal Barakat,فيصل بركات,M,Syrian,Operations & Maintenance,Maintenance Helper,1,Mesaieed Site,2018-05-13,E1030,Limited (3 years),faisal.barakat@aldana-group.example,en
+E1036,Ahmed Hassan,أحمد حسن,M,Egyptian,Operations & Maintenance,Maintenance Helper,1,Mesaieed Site,2018-02-18,E1029,Limited (3 years),ahmed.hassan@aldana-group.example,both
+E1037,Khalid Darwish,خالد درويش,M,Lebanese,Engineering,Head of Engineering,9,Doha HQ,2020-10-04,E1001,Unlimited,khalid.darwish@aldana-group.example,both
+E1038,Rajesh Singh,,M,Indian,Engineering,Engineering Manager,7,Doha HQ,2013-11-21,E1037,Unlimited,rajesh.singh@aldana-group.example,en
+E1039,Kavita Gupta,,F,Indian,Engineering,Senior Engineer,6,Doha HQ,2014-08-21,E1038,Unlimited,kavita.gupta@aldana-group.example,en
+E1040,Renato Bautista,,M,Filipino,Engineering,Senior Engineer,6,Doha HQ,2020-03-03,E1038,Unlimited,renato.bautista@aldana-group.example,en
+E1041,Hassan Saleh,حسن صالح,M,Jordanian,Engineering,Engineer,5,Doha HQ,2019-10-07,E1039,Unlimited,hassan.saleh@aldana-group.example,ar
+E1042,Ali Fouad,علي فؤاد,M,Egyptian,Engineering,Engineer,5,Doha HQ,2026-08-18,E1040,Unlimited,ali.fouad@aldana-group.example,both
+E1043,Rania Fouad,رانيا فؤاد,F,Egyptian,Engineering,Engineer,5,Doha HQ,2024-10-13,E1040,Limited (3 years),rania.fouad@aldana-group.example,both
+E1044,Amal Bouzid,أمل بوزيد,F,Tunisian,Engineering,Engineer,5,Doha HQ,2021-06-14,E1040,Limited (3 years),amal.bouzid@aldana-group.example,en
+E1045,Huda Al-Marri,هدى المري,F,Qatari,Engineering,Junior Engineer,4,Mesaieed Site,2023-09-11,E1043,Unlimited,huda.almarri@aldana-group.example,both
+E1046,Tariq Mostafa,طارق مصطفى,M,Egyptian,Engineering,Junior Engineer,4,Doha HQ,2024-11-27,E1042,Unlimited,tariq.mostafa@aldana-group.example,en
+E1047,Deepak Varma,,M,Indian,Engineering,Junior Engineer,4,Doha HQ,2017-02-05,E1043,Unlimited,deepak.varma@aldana-group.example,en
+E1048,Lakshmi Gupta,,F,Indian,Engineering,CAD Technician,3,Mesaieed Site,2024-03-17,E1047,Unlimited,lakshmi.gupta@aldana-group.example,en
+E1049,Karim Hamid,كريم حامد,M,Sudanese,Engineering,CAD Technician,3,Mesaieed Site,2015-06-16,E1047,Unlimited,karim.hamid@aldana-group.example,both
+E1050,Hamza Hussain,,M,Pakistani,"Health, Safety & Environment",Head of HSE,8,Doha HQ,2020-05-10,E1001,Limited (3 years),hamza.hussain@aldana-group.example,en
+E1051,Sanjay Kumar,,M,Indian,"Health, Safety & Environment",Senior HSE Advisor,6,Doha HQ,2014-03-02,E1050,Unlimited,sanjay.kumar@aldana-group.example,en
+E1052,Sophie Kowalski,,F,Irish,"Health, Safety & Environment",HSE Engineer,5,Mesaieed Site,2025-05-15,E1051,Unlimited,sophie.kowalski@aldana-group.example,en
+E1053,Vikram Gupta,,M,Indian,"Health, Safety & Environment",HSE Engineer,5,Ras Laffan Site,2016-11-13,E1051,Unlimited,vikram.gupta@aldana-group.example,en
+E1054,Jassim Ismail,جاسم إسماعيل,M,Egyptian,"Health, Safety & Environment",HSE Officer,4,Mesaieed Site,2026-06-07,E1052,Limited (3 years),jassim.ismail@aldana-group.example,both
+E1055,Sunita Kumar,,F,Indian,"Health, Safety & Environment",HSE Officer,4,Mesaieed Site,2018-12-18,E1052,Unlimited,sunita.kumar@aldana-group.example,en
+E1056,Zubair Qureshi,,M,Pakistani,"Health, Safety & Environment",HSE Officer,4,Ras Laffan Site,2012-09-30,E1053,Unlimited,zubair.qureshi@aldana-group.example,en
+E1057,Sami Hassan,سامي حسن,M,Egyptian,"Health, Safety & Environment",HSE Inspector,3,Mesaieed Site,2019-10-06,E1054,Unlimited,sami.hassan@aldana-group.example,both
+E1058,Arun Menon,,M,Indian,"Health, Safety & Environment",HSE Inspector,3,Mesaieed Site,2013-01-14,E1056,Limited (3 years),arun.menon@aldana-group.example,en
+E1059,Sita Karki,,F,Sri Lankan,Finance,Chief Financial Officer,9,Doha HQ,2019-03-13,E1001,Unlimited,sita.karki@aldana-group.example,en
+E1060,Ahmed Osman,أحمد عثمان,M,Sudanese,Finance,Finance Manager,7,Doha HQ,2017-09-05,E1059,Unlimited,ahmed.osman@aldana-group.example,en
+E1061,Marco Ramos,,M,Filipino,Finance,Senior Accountant,6,Doha HQ,2019-06-16,E1060,Unlimited,marco.ramos@aldana-group.example,en
+E1062,Imran Raza,,M,Pakistani,Finance,Financial Accountant,5,Doha HQ,2025-10-29,E1061,Unlimited,imran.raza@aldana-group.example,en
+E1063,Nida Chaudhry,,F,Pakistani,Finance,Financial Accountant,5,Doha HQ,2017-04-27,E1061,Limited (3 years),nida.chaudhry@aldana-group.example,en
+E1064,Marco Walsh,,M,South African,Finance,Financial Accountant,5,Doha HQ,2014-07-10,E1061,Unlimited,marco.walsh@aldana-group.example,en
+E1065,Joyce Bautista,,F,Filipino,Finance,Accounts Officer,4,Doha HQ,2023-08-22,E1063,Unlimited,joyce.bautista@aldana-group.example,en
+E1066,Tariq Taha,طارق طه,M,Sudanese,Finance,Accounts Officer,4,Doha HQ,2015-11-15,E1064,Unlimited,tariq.taha@aldana-group.example,both
+E1067,Tariq Naguib,طارق نجيب,M,Egyptian,Finance,Accounts Clerk,3,Doha HQ,2023-09-17,E1065,Limited (3 years),tariq.naguib@aldana-group.example,en
+E1068,Mark Hughes,,M,Polish,Human Resources,Head of Human Resources,9,Doha HQ,2025-03-03,E1001,Unlimited,mark.hughes@aldana-group.example,en
+E1069,Rania Ben Salah,رانيا بن صالح,F,Moroccan,Human Resources,HR Manager,7,Doha HQ,2012-01-16,E1068,Unlimited,rania.ben.salah@aldana-group.example,both
+E1070,Jassim Trabelsi,جاسم الطرابلسي,M,Tunisian,Human Resources,HR Business Partner,5,Doha HQ,2024-01-04,E1069,Unlimited,jassim.trabelsi@aldana-group.example,en
+E1071,Deepa Nair,,F,Indian,Human Resources,HR Business Partner,5,Doha HQ,2017-07-30,E1069,Limited (3 years),deepa.nair@aldana-group.example,en
+E1072,Suresh Singh,,M,Indian,Human Resources,HR Officer,4,Doha HQ,2017-06-25,E1071,Unlimited,suresh.singh@aldana-group.example,en
+E1073,Marco Dela Cruz,,M,Filipino,Human Resources,HR Officer,4,Doha HQ,2014-01-19,E1071,Unlimited,marco.dela.cruz@aldana-group.example,en
+E1074,Shaikha Al-Marri,شيخة المري,F,Qatari,Human Resources,HR Assistant,3,Doha HQ,2023-04-26,E1073,Unlimited,shaikha.almarri@aldana-group.example,both
+E1075,Asif Chaudhry,,M,Pakistani,Information Technology,Head of IT,8,Doha HQ,2014-03-24,E1001,Unlimited,asif.chaudhry@aldana-group.example,en
+E1076,Aisha Hassan,عائشة حسن,F,Egyptian,Information Technology,Senior Systems Analyst,6,Doha HQ,2019-09-09,E1075,Unlimited,aisha.hassan@aldana-group.example,both
+E1077,Nasser Al-Mannai,ناصر المناعي,M,Qatari,Information Technology,Systems Analyst,5,Doha HQ,2021-10-24,E1076,Unlimited,nasser.almannai@aldana-group.example,both
+E1078,Mohammed Al-Marri,محمد المري,M,Qatari,Information Technology,Systems Analyst,5,Doha HQ,2023-06-14,E1076,Unlimited,mohammed.almarri@aldana-group.example,both
+E1079,Mohammed Hassan,محمد حسن,M,Egyptian,Information Technology,IT Support Analyst,4,Doha HQ,2025-11-23,E1078,Unlimited,mohammed.hassan@aldana-group.example,both
+E1080,Asif Malik,,M,Pakistani,Information Technology,IT Support Analyst,4,Doha HQ,2013-06-05,E1077,Limited (3 years),asif.malik@aldana-group.example,en
+E1081,Aisha Mahgoub,عائشة محجوب,F,Sudanese,Information Technology,IT Support Technician,3,Doha HQ,2024-02-25,E1079,Unlimited,aisha.mahgoub@aldana-group.example,en
+E1082,Asif Hussain,,M,Pakistani,Information Technology,IT Support Technician,3,Doha HQ,2016-11-30,E1079,Unlimited,asif.hussain@aldana-group.example,en
+E1083,Jassim Taha,جاسم طه,M,Sudanese,Sales & Business Development,Head of Sales & Business Development,8,Doha HQ,2010-11-08,E1001,Unlimited,jassim.taha@aldana-group.example,ar
+E1084,Hamza Raza,,M,Pakistani,Sales & Business Development,Senior Sales Manager,6,Doha HQ,2025-08-10,E1083,Unlimited,hamza.raza@aldana-group.example,en
+E1085,Manoj Nair,,M,Indian,Sales & Business Development,Sales Executive,5,Doha HQ,2023-11-12,E1084,Limited (3 years),manoj.nair@aldana-group.example,en
+E1086,Karim Bouzid,كريم بوزيد,M,Tunisian,Sales & Business Development,Sales Executive,5,Doha HQ,2023-12-28,E1084,Unlimited,karim.bouzid@aldana-group.example,ar
+E1087,Nilmini Karki,,F,Nepali,Sales & Business Development,Sales Executive,5,Doha HQ,2026-08-20,E1084,Limited (3 years),nilmini.karki@aldana-group.example,en
+E1088,Paul Hughes,,M,Italian,Sales & Business Development,Sales Coordinator,4,Doha HQ,2024-07-10,E1085,Unlimited,paul.hughes@aldana-group.example,en
+E1089,Hamad Saleh,حمد صالح,M,Syrian,Sales & Business Development,Sales Coordinator,4,Doha HQ,2012-10-07,E1087,Unlimited,hamad.saleh@aldana-group.example,both
+E1090,Sanjay Sharma,,M,Indian,Procurement & Supply Chain,Head of Procurement,8,Doha HQ,2012-10-17,E1001,Unlimited,sanjay.sharma@aldana-group.example,en
+E1091,Fatima Hamid,فاطمة حامد,F,Sudanese,Procurement & Supply Chain,Senior Procurement Specialist,6,Doha HQ,2014-09-14,E1090,Unlimited,fatima.hamid@aldana-group.example,both
+E1092,Carlo Cruz,,M,Filipino,Procurement & Supply Chain,Procurement Specialist,5,Doha HQ,2017-03-19,E1091,Unlimited,carlo.cruz@aldana-group.example,en
+E1093,Marco Walsh,,M,British,Procurement & Supply Chain,Procurement Specialist,5,Doha HQ,2018-10-21,E1091,Limited (3 years),marco.walsh2@aldana-group.example,en
+E1094,Chaminda Perera,,M,Nepali,Procurement & Supply Chain,Procurement Officer,4,Doha HQ,2020-11-22,E1093,Unlimited,chaminda.perera@aldana-group.example,en
+E1095,Tariq Awad,طارق عوض,M,Lebanese,Procurement & Supply Chain,Procurement Officer,4,Doha HQ,2022-11-13,E1093,Limited (3 years),tariq.awad@aldana-group.example,both
+E1096,Paul Thompson,,M,British,Procurement & Supply Chain,Buyer Assistant,3,Doha HQ,2014-11-13,E1094,Unlimited,paul.thompson@aldana-group.example,en
+E1097,Aisha Idris,عائشة إدريس,F,Sudanese,Legal & Compliance,Head of Legal & Compliance,8,Doha HQ,2010-04-01,E1001,Unlimited,aisha.idris@aldana-group.example,both
+E1098,Aisha Barakat,عائشة بركات,F,Palestinian,Legal & Compliance,Senior Legal Counsel,6,Doha HQ,2018-11-08,E1097,Unlimited,aisha.barakat@aldana-group.example,both
+E1099,Huda Osman,هدى عثمان,F,Sudanese,Legal & Compliance,Legal Counsel,5,Doha HQ,2024-03-26,E1098,Unlimited,huda.osman@aldana-group.example,both
+E1100,Mohammed Haddad,محمد حداد,M,Palestinian,Legal & Compliance,Contracts Officer,4,Doha HQ,2021-07-19,E1099,Unlimited,mohammed.haddad@aldana-group.example,en

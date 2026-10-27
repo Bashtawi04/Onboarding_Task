@@ -1,0 +1,11 @@
+doc_id,title,version,status,effective_from,owner,doc_type,authority_rank,file_path
+HB-01,New Hire Handbook,3.0,Current,2026-07-01,Human Resources (HR Manager),Handbook,2,handbook/New_Hire_Handbook.pdf
+ONB-01,Before You Arrive,2.0,Current,2026-06-01,Human Resources (HR Manager),Procedure,1,procedures/ONB-01_Before_You_Arrive.pdf
+ONB-02,First Day and ID Card,2.0,Current,2026-06-01,Human Resources (HR Manager),Procedure,1,procedures/ONB-02_First_Day_and_ID_Card.pdf
+ONB-03,Medical Fitness and Health Insurance,2.2,Current,2026-08-01,Human Resources (HR Manager),Procedure,1,procedures/ONB-03_Medical_Fitness_and_Health_Insurance.pdf
+ONB-04,"Payroll, Bank Account and WPS",2.1,Current,2026-09-01,Finance (Finance Manager),Procedure,1,procedures/ONB-04_Payroll_Bank_Account_and_WPS.pdf
+ONB-05,IT Access and Equipment,2.1,Current,2026-08-15,Information Technology (Head of IT),Procedure,1,procedures/ONB-05_IT_Access_and_Equipment.md
+ONB-05,IT Access and Equipment,1.0,Superseded,2024-02-01,Information Technology (Head of IT),Procedure,1,procedures/archive/ONB-05_IT_Access_v1.0.pdf
+ONB-06,HSE Induction,2.0,Current,2026-05-01,"Health, Safety & Environment (Head of HSE)",Procedure,1,procedures/ONB-06_HSE_Induction.pdf
+ONB-07,Probation and First 90 Days,1.3,Current,2026-06-01,Human Resources (HR Manager),Procedure,1,procedures/ONB-07_Probation_and_First_90_Days.md
+FAQ-01,New Hire FAQ,1.4,Current,2025-03-10,Human Resources (HR Officer),FAQ,3,faq/new_hire_faq.md
