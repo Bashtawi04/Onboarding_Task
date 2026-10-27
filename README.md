@@ -47,7 +47,6 @@ The supplied company documents and employee records are fictional training data.
 
 ## 🏗️ Architecture & Pipeline
 
-<img src="architecture.png" alt="Onboarding assistant architecture" width="720">
 
 [Open the full-size architecture diagram](architecture.png)
 
