@@ -1,0 +1,11 @@
+request_id,new_hire_id,kind,note,status,late,requested_by,approved_by,created_date
+1,NH-2601,account,,fulfilled,0,E1005,E1005,2026-09-27
+2,NH-2601,laptop,,fulfilled,0,E1005,E1005,2026-09-27
+3,NH-2602,account,,fulfilled,0,E1060,E1060,2026-10-04
+4,NH-2602,laptop,,fulfilled,0,E1060,E1060,2026-10-04
+5,NH-2603,account,,fulfilled,0,E1071,E1071,2026-10-11
+6,NH-2603,laptop,,fulfilled,0,E1071,E1071,2026-10-11
+7,NH-2604,account,,fulfilled,0,E1052,E1052,2026-10-18
+8,NH-2604,laptop,,open,0,E1052,E1052,2026-10-09
+9,NH-2605,account,,open,0,E1078,E1078,2026-10-09
+10,NH-2605,laptop,,open,0,E1078,E1078,2026-10-09

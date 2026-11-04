@@ -1,0 +1,13 @@
+new_hire_id,full_name_en,full_name_ar,job_title,department,grade,location,employee_type,start_date,manager_id,buddy_id,work_email
+NH-2601,Arjun Nambiar,,Maintenance Engineer,Operations & Maintenance,5,Ras Laffan Site,Overseas hire,2026-09-27,E1005,E1011,arjun.nambiar@aldana-group.example
+NH-2602,Reem Al-Sayed,ريم السيد,Financial Accountant,Finance,5,Doha HQ,Resident hire,2026-10-04,E1060,E1063,reem.alsayed@aldana-group.example
+NH-2603,Noora Al-Kuwari,نورة الكواري,HR Officer,Human Resources,4,Doha HQ,Qatari national,2026-10-11,E1071,E1072,noora.alkuwari@aldana-group.example
+NH-2604,Daniel Mwangi,,HSE Officer,"Health, Safety & Environment",4,Mesaieed Site,Overseas hire,2026-10-18,E1052,E1055,daniel.mwangi@aldana-group.example
+NH-2605,Hesham Fathy,,IT Support Analyst,Information Technology,4,Doha HQ,Resident hire,2026-10-19,E1078,E1079,
+NH-2606,Ramesh Thapa,,Maintenance Technician,Operations & Maintenance,2,Mesaieed Site,Overseas hire,2026-10-25,E1025,E1028,
+NH-2607,Lina Khoury,لينا خوري,Procurement Officer,Procurement & Supply Chain,4,Doha HQ,Resident hire,2026-10-26,E1091,E1094,
+NH-2608,Hamad Al-Sulaiti,حمد السليطي,Junior Engineer,Engineering,4,Doha HQ,Qatari national,2026-11-01,E1040,E1044,
+NH-2609,Joselito Reyes,,Maintenance Supervisor,Operations & Maintenance,4,Ras Laffan Site,Overseas hire,2026-11-01,E1007,E1015,
+NH-2610,Dalia Mansour,داليا منصور,Sales Executive,Sales & Business Development,5,Doha HQ,Resident hire,2026-11-10,E1084,E1085,
+NH-2611,Sipho Ndlovu,,HSE Inspector,"Health, Safety & Environment",3,Ras Laffan Site,Overseas hire,2026-11-08,E1053,E1056,
+NH-2612,Maryam Al-Naimi,مريم النعيمي,Compliance Officer,Legal & Compliance,4,Doha HQ,Qatari national,2026-11-15,E1098,E1100,
