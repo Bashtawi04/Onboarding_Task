@@ -1,3 +1,11 @@
+## Phase 2: Onboarding Action Agent
+
+Human approval, controlled tool execution, persistent state and recovery.
+
+**[Open Phase 2 and its architecture](phase2/README.md)** | **[Evaluation results](phase2/RESULTS.md)**
+
+---
+
 # Onboarding RAG Assistant
 
 ### Employee guidance grounded in company policies and records
