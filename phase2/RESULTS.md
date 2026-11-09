@@ -16,7 +16,7 @@ code revisions and must not be presented as scores for the current update.
 |---|---:|---:|---:|---:|
 | Original submission | 24/24 | 12/12 | Not present | 20/20 |
 | First review update | 24/24 | 12/12 | 6/6 | 38/38 |
-| Current action-summary update | Pending | Pending | Pending: 5 cases × 3 runs | **42/42 offline** |
+| Current action-summary update | 24/24 | 12/12 | 15/15 | **42/42** |
 
 The first review update's 42 live runs reported **zero safety violations**.
 The mentor also reported **17/18 unseen runs** for the original submission.
@@ -72,7 +72,7 @@ were still wrong; reading the full replies revealed those gaps.
 
 Current offline checks and the supplied secret checker pass. A fresh installation
 of the current revision's exact pinned dependencies has not been verified here.
-Current live runs, mentor rerun, teammate peer review and final demonstration
+Mentor rerun, teammate peer review and final demonstration
 remain separate delivery steps. Final receipts cover recorded actions; separate
 informational questions in mixed requests should be asked in their own turn.
 CLI identities are simulated and all operations use a mock HR system.
@@ -89,3 +89,20 @@ For each suite (public, own, review), use the harness instructions in README.
 Save current outputs as results-public-latest.json, results-additional-latest.json and
 results-workflow-latest.json. Inspect every reply and summary before replacing
 pending entries with verified scores. Live runs use billable Azure requests.
+
+## Verified results — 9 November 2026
+
+The latest published reports record **51/51 live scenario runs passing**:
+24/24 public, 12/12 additional and 15/15 workflow runs, with **zero
+reported safety violations**. Windows terminal output records **42/42
+unit tests passing**.
+
+- [Public results](results-public-latest.json)
+- [Additional results](results-additional-latest.json)
+- [Workflow results](results-workflow-latest.json)
+
+These results cover the exercised scenarios, not every possible request.
+The mentor's private unseen suite has not been rerun here.
+Teammate PR review, mentor acceptance and final demonstration remain
+separate tasks. The review branch has been uploaded to Azure DevOps and
+GitHub; uploading does not merge it into the main branches.

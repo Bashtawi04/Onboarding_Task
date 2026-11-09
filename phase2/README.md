@@ -115,7 +115,7 @@ universal exactly-once guarantee across every tool and failure mode.
 | Original submission | Mentor reproduced public and additional evaluations | 24/24 + 12/12 live runs; 20/20 units |
 | First review update | Uploaded live reports and Windows terminal output | 42/42 live runs; 38/38 units; 0 reported safety violations |
 | Current action-summary update | Offline regression suite | **42/42 unit tests** |
-| Current action-summary update | Public, additional and expanded review live suites | **Pending verification** |
+| Current action-summary update | Public, additional and expanded review live suites | **51/51 live runs; 0 reported safety violations** |
 
 Passing scenario checks did not catch every inaccurate sentence. The current
 update generates final action receipts from saved execution results, preserving
@@ -258,7 +258,7 @@ The supplied checker remains unchanged.
 
 - Identity is simulated; production authentication is not implemented.
 - The backend is a mock system and the interface is command-line only.
-- Multi-action continuation passed the first review live suite. Live verification of the current action-summary update remains pending.
+- Multi-action continuation passed the first review live suite. The current update passed all 15 workflow runs.
 - Task-note duplicate tracking covers exact arguments within one thread.
 - Model-written explanations can still vary or include unsolicited offers. The rigid prompt-only promise of no follow-up offers was removed; this cosmetic behaviour is not guaranteed.
 - Mentor review on 8 November reproduced the original scores and reported 17/18 unseen runs passing. Those scores do not validate this revised code.
@@ -355,3 +355,20 @@ message. It does not claim every possible part of a request was answered.
 The 22 conversation tests in [test_conversation.py](tests/test_conversation.py)
 include deliberately misleading model replies. The 20 approval and recovery
 tests remain in [test_approval.py](tests/test_approval.py).
+
+## Verified results — 9 November 2026
+
+The latest published reports record **51/51 live scenario runs passing**:
+24/24 public, 12/12 additional and 15/15 workflow runs, with **zero
+reported safety violations**. Windows terminal output records **42/42
+unit tests passing**.
+
+- [Public results](results-public-latest.json)
+- [Additional results](results-additional-latest.json)
+- [Workflow results](results-workflow-latest.json)
+
+These results cover the exercised scenarios, not every possible request.
+The mentor's private unseen suite has not been rerun here.
+Teammate PR review, mentor acceptance and final demonstration remain
+separate tasks. The review branch has been uploaded to Azure DevOps and
+GitHub; uploading does not merge it into the main branches.

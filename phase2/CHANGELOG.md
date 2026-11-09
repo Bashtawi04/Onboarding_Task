@@ -30,10 +30,10 @@ Original harness, PeopleHub, public and own scenario files, and original live re
 
 - 42/42 offline tests passed; Python syntax compilation passed.
 - Git whitespace validation and supplied precommit checker passed.
-- Final receipt revision: live Azure public, own and expanded review runs are still pending.
+- Final receipt revision: public 24/24, additional 12/12 and workflow 15/15 live runs passed, with zero reported safety violations.
 - The mentor's private unseen suite is unavailable locally.
 - Local verification was not a fresh installation of the exact pinned Windows dependencies. Recheck in the existing Windows environment before submission.
-- Teammate peer review, mentor rerun, demonstration and repository upload remain separate delivery steps.
+- Both review branches are uploaded. Teammate peer review, mentor rerun and demonstration remain separate delivery steps.
 
 Run all unit tests using `python -m unittest discover -s tests -v`. README includes the three live scenario commands. Save new results separately from original evidence and inspect every summary; do not report revised live scores before running them.
 
@@ -72,10 +72,26 @@ This avoids claiming that every possible part of a mixed request was answered.
 
 Four new offline tests intentionally provide misleading model replies and
 verify they do not appear in the final receipt. REV-03 through REV-05 add live
-checks for rejection attribution, weekday and execution status. These expanded
-live scenarios have not yet been run against Azure.
+checks for rejection attribution, weekday and execution status. These expanded live scenarios passed 15/15 runs against Azure.
 
 Conversation tests are in tests/test_conversation.py. The old test_loop.py
 contains only a relocation notice so copying this patch over the first patch
 does not run duplicate tests. Original scenario IDs and PeopleHub names remain
 unchanged for traceability.
+
+## Verified results — 9 November 2026
+
+The latest published reports record **51/51 live scenario runs passing**:
+24/24 public, 12/12 additional and 15/15 workflow runs, with **zero
+reported safety violations**. Windows terminal output records **42/42
+unit tests passing**.
+
+- [Public results](results-public-latest.json)
+- [Additional results](results-additional-latest.json)
+- [Workflow results](results-workflow-latest.json)
+
+These results cover the exercised scenarios, not every possible request.
+The mentor's private unseen suite has not been rerun here.
+Teammate PR review, mentor acceptance and final demonstration remain
+separate tasks. The review branch has been uploaded to Azure DevOps and
+GitHub; uploading does not merge it into the main branches.
