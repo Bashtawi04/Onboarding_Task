@@ -1,6 +1,9 @@
 """Onboarding agent with persistent human approval and safe execution."""
 
 import argparse
+import csv
+from datetime import date
+import re
 import hashlib
 import json
 import os
@@ -37,14 +40,21 @@ Do not merely offer to perform a clearly requested action.
 A proposal has not executed: never claim that it has.
 
 Check multiple requested actions independently.
-If an account is blocked but a laptop is allowed, propose the laptop.
-G1-G3 site staff use shared terminals rather than laptops.
+After every approval, rejection or failed action, continue with other requested parts.
+Never retry or re-propose a resolved action in the same user request.
+Report completed, rejected, failed and still unresolved parts separately.
+Business eligibility comes from PeopleHub checks, not assumptions.
+After ERR_FORBIDDEN stop: do not try other tools for this person.
 
 For appointments, read slots and choose an open slot on or after both
 the requested date and the start date. Prefer the first five working
 days, counting Sunday through Thursday.
 
 For emails, obtain addresses from hire records or team contacts.
+For email to a hire, use their recorded work email only. If missing, ask the
+user what to do; never substitute HR or a manager without explicit instruction.
+Only propose actions explicitly requested by the user; do not suggest extra work.
+Reply in the language of the latest user request.
 Never include passwords, sign-in codes or private medical details.
 
 For an explicit request to add an internal task note, read the tasks to find
@@ -52,7 +62,8 @@ its task_id, then call add_task_note. This low-risk write needs no approval.
 Do not add notes unless the user requested one. Never put private medical
 information, passwords or sign-in codes in notes or emails.
 After a tool reports success, do not repeat that action.
-Answer concisely and cover all requested parts. No follow-up offers.
+Answer concisely and cover all requested parts. If a requested operation has no
+tool, explain that limitation without suggesting unrelated actions.
 """
 
 
@@ -242,6 +253,84 @@ def thread_lock(thread):
         connection.close()
 
 
+def user_text(state):
+    return next((m["content"] for m in reversed(state.get("messages", []))
+                 if m["role"] == "user"), "")
+
+
+def localized(state, english, arabic):
+    return arabic if re.search(r"[\u0600-\u06ff]", user_text(state)) else english
+
+
+def approver_names(ids, hire, state=None):
+    # Seed directory is a DISPLAY fallback only. Approval always uses live IDs
+    # returned by check_action, and is checked again before the write.
+    names = {}
+    path = Path(__file__).parent / "peoplehub/seed_data/common/employees.csv"
+    if path.exists():
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            names = {r["employee_id"]: r["full_name_en"] for r in csv.DictReader(handle)}
+    if hire.get("manager_name"):
+        names[hire["manager_id"]] = hire["manager_name"]
+    return localized(state or {}, " or ", " أو ").join(names.get(i, i) for i in ids)
+
+
+def describe_action(tool, args, hire, state=None, include_details=True):
+    state = state or {}
+    person = hire.get("full_name_en", args.get("new_hire_id", "employee"))
+    person += " (" + args["new_hire_id"] + ")"
+    if tool == "create_it_request":
+        kinds = {"laptop": ("Laptop", "حاسوب محمول"),
+                 "account": ("IT account", "حساب تقنية المعلومات"),
+                 "equipment": ("Equipment", "معدات")}
+        en, ar = kinds[args["kind"]]
+        return localized(state, en + " request for ", "طلب " + ar + " لـ ") + person + "." + (" " + args["note"] if include_details and args.get("note") else "")
+    if tool == "book_pro_appointment":
+        return localized(state, args["service"] + " appointment for ", "موعد " + args["service"] + " لـ ") + person + " — " + args["slot_id"] + "."
+    return localized(state, "Email about ", "رسالة بريد بشأن ") + person + localized(state, " to ", " إلى ") + args["to"] + "; " + args["subject"] + "." + ("\n" + args["body"] if include_details else "")
+
+
+def action_identity(tool, args):
+    # Prevent re-proposing a resolved action in this user request even if the
+    # model changes its prose note after rejection/failure. Reset on a new say.
+    identity = [tool, args["new_hire_id"]]
+    identity.append(args.get("kind") or args.get("service") or args.get("to", "").lower())
+    return identity
+
+
+def email_recipient_error(state, args):
+    if not user_text(state):
+        return None  # Legacy saved state without user text; API rules still apply.
+    hire = read_call(onboarding.get_new_hire, new_hire_id=args["new_hire_id"], actor=state["actor"])
+    if "error" in hire:
+        return hire
+    target = args["to"].strip().lower()
+    if target == (hire.get("work_email") or "").strip().lower():
+        return None
+    # Conservative explicit-recipient check. Do not infer a user's intention
+    # from the model-generated email body or its choice of an allowed mailbox.
+    request = user_text(state).lower()
+    if target and target in re.findall(r"[\w.+-]+@[\w.-]+", request):
+        return None
+    return {"error": "RECIPIENT_CLARIFICATION", "message": localized(state,
+        f"The email recipient needs clarification. {hire['full_name_en']}'s recorded work email is "
+        + (hire.get("work_email") or "missing")
+        + ". No email proposed or sent. Which recipient should be used? Please specify the intended address; PeopleHub will still check whether it is allowed.",
+        f"يلزم توضيح المستلم. البريد الوظيفي المسجل لـ {hire['full_name_en']} هو "
+        + (hire.get("work_email") or "غير موجود")
+        + ". لم يتم اقتراح أو إرسال رسالة. يرجى تحديد عنوان المستلم المطلوب للتحقق من السماح به.")}
+
+
+def respond_and_save(thread, state, status, message, pending=None):
+    prefix = "\n".join(state.get("outcomes", []))
+    if prefix:
+        message = prefix + "\n" + message
+    state["continuation_due"] = False
+    state["last_response"] = response(status, message, pending)
+    save(thread, state)
+    return state["last_response"]
+
+
 def prepare_proposal(name, args, actor):
     function_name = WRITE_NAMES[name]
     hire_id = args["new_hire_id"]
@@ -280,48 +369,14 @@ def prepare_proposal(name, args, actor):
         manager = hire["manager_id"]
         approvers.sort(key=lambda person: person != manager)
 
-    # Preserve relevant prerequisites using actual records.
+    # Historical compatibility: old saved proposals may contain contract context.
+    # New proposals report actual failed checks through the conversation instead
+    # of attaching an account prerequisite to unrelated laptop requests (OB-08).
     context = []
-    if (
-        function_name == "create_it_request"
-        and args["kind"] in {"laptop", "account"}
-    ):
-        records = read_call(
-            onboarding.list_tasks,
-            new_hire_id=hire_id,
-            actor=actor,
-        )
-        if "error" in records:
-            return None, records
-
-        contract = next(
-            (
-                task
-                for task in records["tasks"]
-                if task["task_code"] == "CONTRACT_SIGNED"
-            ),
-            None,
-        )
-
-        if contract is None or contract["status"] != "Done":
-            status = contract["status"] if contract else "missing"
-            context.append(
-                "IT account prerequisite: the signed contract is not "
-                "confirmed by HR "
-                f"(recorded contract status: {status}). "
-                "An account request requires that task to be Done; "
-                "a phone claim does not change the record."
-            )
-
-    summary = (
-        f"Proposed {function_name}: "
-        + json.dumps(args, ensure_ascii=False)
-    )
+    summary = describe_action(function_name, args, hire)
+    summary += " Needs approval from " + approver_names(approvers, hire) + "."
     if check.get("late"):
         summary += " This IT request is late."
-
-    if context:
-        summary += " " + " ".join(context)
 
     return {
         "tool": function_name,
@@ -329,37 +384,65 @@ def prepare_proposal(name, args, actor):
         "approvers": approvers,
         "summary": summary,
         "context": context,
+        "hire": hire,
     }, None
 
 
 def finish_pending(thread, state, result, message):
+    pending = state["pending"]
     execution = state.get("execution") or {}
-    context = execution.get(
-        "context", state["pending"].get("context", [])
-    )
-    if context:
-        message += " " + " ".join(context)
-
+    args = execution.get("args", pending["args"])
+    description = describe_action(pending["tool"], args, pending.get("hire", {}), state, include_details=False)
+    if result.get("rejected"):
+        by = approver_names([execution.get("by", "approver")], pending.get("hire", {}), state)
+        text = localized(state, "Request rejected by " + by + "; not executed: ",
+                         "تم رفض الطلب بواسطة " + by + " ولم ينفذ: ")
+    elif "error" in result or result.get("allowed") is False:
+        text = localized(state, "Action failed / not executed: ", "فشل الإجراء ولم ينفذ: ")
+    else:
+        text = localized(state, "Action completed: ", "تم تنفيذ الإجراء: ")
+    text += description
+    if "error" in result or result.get("allowed") is False:
+        text += " " + str(result.get("message") or result.get("reason") or result.get("error"))
+    if result.get("late"):
+        text += localized(state, " This IT request is late.", " طلب تقنية المعلومات متأخر.")
+    if not result.get("rejected") and "error" not in result and result.get("allowed") is not False:
+        if result.get("request_id") is not None:
+            text += localized(state, " Request ID: ", " رقم الطلب: ") + str(result["request_id"]) + "."
+            if result.get("status"):
+                text += localized(state, " Recorded status: ", " الحالة المسجلة: ") + result["status"] + "."
+        if result.get("slot_date"):
+            booked = date.fromisoformat(result["slot_date"])
+            en_days = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+            ar_days = ("الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد")
+            day = localized(state, en_days[booked.weekday()], ar_days[booked.weekday()])
+            text += localized(state, " Booked for ", " تم الحجز في ") + day + " " + booked.isoformat()
+            if result.get("slot_time"):
+                text += " " + result["slot_time"]
+            text += "."
+    status = ("rejected_by_approver" if result.get("rejected") else
+              "not_executed" if "error" in result or result.get("allowed") is False else "executed")
     state["messages"].append({
-        "role": "tool",
-        "tool_call_id": state["pending_call_id"],
-        "content": json.dumps(result, ensure_ascii=False),
-    })
-    state["messages"].append({
-        "role": "assistant",
-        "content": message,
+        "role": "tool", "tool_call_id": state["pending_call_id"],
+        "content": json.dumps({"action": pending["tool"], "args": args,
+                               "result": result, "resolved": True,
+                               "execution_status": status, "decision_by": execution.get("by")}, ensure_ascii=False),
     })
     state.setdefault("history", []).append({
-        "proposal": state["pending"],
-        "decision": state.get("execution"),
-        "result": result,
+        "proposal": pending, "decision": state.get("execution"), "result": result,
     })
-
+    state.setdefault("outcomes", []).append(text)
+    state.setdefault("resolved", []).append(action_identity(pending["tool"], pending["args"]))
     state["pending"] = None
     state.pop("execution", None)
     state.pop("pending_call_id", None)
-    state["last_response"] = response("done", message)
+    # Persist finalization BEFORE contacting the model. A failed continuation can
+    # be resumed without replaying the write or duplicating its tool-result message.
+    state["continuation_due"] = any(m["role"] == "user" for m in state["messages"])
+    state["last_response"] = response("done", text)
     save(thread, state)
+    if state["continuation_due"]:
+        return run_agent(thread, state)
     return state["last_response"]
 
 
@@ -367,6 +450,8 @@ def resume(thread, state, decision, by, edit):
     pending = state.get("pending")
 
     if not pending:
+        if state.get("continuation_due"):
+            return run_agent(thread, state)
         return state.get(
             "last_response",
             response("done", "No approval is pending."),
@@ -419,6 +504,10 @@ def resume(thread, state, decision, by, edit):
         )
 
     execution = state.get("execution")
+    if tool == "send_email" and "to" in edit and not execution:
+        recipient_error = email_recipient_error(state, args)
+        if recipient_error:
+            return response("awaiting_approval", recipient_error["message"], pending)
 
     if execution:
         # Recover an interrupted write using the exact saved decision.
@@ -568,108 +657,82 @@ def run_agent(thread, state):
     endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
     if not endpoint.endswith("/openai/v1"):
         endpoint += "/openai/v1"
-
-    client = OpenAI(
-        base_url=endpoint + "/",
-        api_key=os.environ["AZURE_OPENAI_API_KEY"],
-        timeout=45,
-        max_retries=0,
-    )
-
+    client = OpenAI(base_url=endpoint + "/", api_key=os.environ["AZURE_OPENAI_API_KEY"],
+                    timeout=45, max_retries=0)
     for _ in range(8):
-        result = client.chat.completions.create(
-            model=os.environ["AZURE_OPENAI_DEPLOYMENT"],
-            messages=state["messages"],
-            tools=TOOLS,
-            parallel_tool_calls=False,
-        )
-        message = result.choices[0].message
-
-        if not message.tool_calls:
-            answer = message.content or "Please clarify your request."
-            state["messages"].append({
-                "role": "assistant",
-                "content": answer,
-            })
+        try:
+            result = client.chat.completions.create(
+                model=os.environ["AZURE_OPENAI_DEPLOYMENT"], messages=state["messages"],
+                tools=TOOLS, parallel_tool_calls=False)
+        except Exception:
+            state["continuation_due"] = True
+            # Keep continuation_due true on a failed model call; resume can retry
+            # the conversation without re-executing the already completed action.
             save(thread, state)
-            return response("done", answer)
-
+            return response("error", "\n".join(state.get("outcomes", [])) +
+                            "\nConversation could not continue. Remaining actions are unresolved; retry resume.")
+        message = result.choices[0].message
+        if not message.tool_calls:
+            # The model still chooses the next requested tool, but it does not
+            # rewrite authoritative outcomes once this turn has resolved actions.
+            # Read-only turns retain the model answer. Mixed action/read requests
+            # receive an explicitly bounded receipt, not an all-work-done claim.
+            answer = (localized(state, "Summary of recorded actions. Separate informational questions are not included in this receipt.",
+                                "ملخص الإجراءات المسجلة. الأسئلة المعلوماتية المنفصلة غير مدرجة في هذا الملخص.")
+                      if state.get("resolved") else message.content or "Please clarify your request.")
+            state["messages"].append({"role": "assistant", "content": answer})
+            return respond_and_save(thread, state, "done", answer)
         if len(message.tool_calls) != 1:
-            return response(
-                "error",
-                "Unexpected tool batch. No tool in that batch ran.",
-            )
-
+            return respond_and_save(thread, state, "error", "Unexpected tool batch. No tool in that batch ran; remaining work is unresolved.")
         call = message.tool_calls[0]
         name = call.function.name
-        state["messages"].append({
-            "role": "assistant",
-            "content": message.content,
-            "tool_calls": [{
-                "id": call.id,
-                "type": "function",
-                "function": {
-                    "name": name,
-                    "arguments": call.function.arguments,
-                },
-            }],
-        })
-
+        state["messages"].append({"role": "assistant", "content": message.content,
+            "tool_calls": [{"id": call.id, "type": "function", "function": {
+                "name": name, "arguments": call.function.arguments}}]})
+        stop_message = None
         try:
             if name not in SPECS:
                 raise ValueError("Unknown tool")
-
-            args = MODELS[name].model_validate_json(
-                call.function.arguments
-            ).model_dump()
-
+            args = MODELS[name].model_validate_json(call.function.arguments).model_dump()
             if name in WRITE_NAMES:
-                pending, output = prepare_proposal(
-                    name, args, state["actor"]
-                )
-                if pending is not None:
-                    state["pending"] = pending
-                    state["pending_call_id"] = call.id
-                    state["approval_message"] = (
-                        pending["summary"]
-                        + " Awaiting approval; this proposed action has not executed."
-                    )
-                    save(thread, state)
-                    return response(
-                        "awaiting_approval",
-                        state["approval_message"],
-                        pending,
-                    )
-
+                if action_identity(WRITE_NAMES[name], args) in state.get("resolved", []):
+                    output = {"error": "ALREADY_RESOLVED", "message": "This action was already completed, rejected or failed. Continue only other requested actions; do not propose it again."}
+                elif name == "propose_email" and (output := email_recipient_error(state, args)):
+                    # Let the model continue unrelated requested actions, but retain
+                    # this deterministic clarification in every subsequent reply.
+                    if output.get("error") == "RECIPIENT_CLARIFICATION":
+                        if output["message"] not in state.setdefault("outcomes", []):
+                            state["outcomes"].append(output["message"])
+                else:
+                    pending, output = prepare_proposal(name, args, state["actor"])
+                    if pending is not None:
+                        pending["summary"] = describe_action(pending["tool"], args, pending["hire"], state)
+                        pending["summary"] += localized(state, " Needs approval from ", " يحتاج موافقة ") + approver_names(pending["approvers"], pending["hire"], state) + "."
+                        state["pending"] = pending
+                        state["pending_call_id"] = call.id
+                        state["approval_message"] = pending["summary"] + localized(state, " Awaiting approval; nothing executed for this proposal.", " بانتظار الموافقة؛ لم ينفذ هذا الاقتراح.")
+                        return respond_and_save(thread, state, "awaiting_approval", state["approval_message"], pending)
             elif name == "add_task_note":
-                output = add_note_once(
-                    thread, state, call.id, args
-                )
-
+                output = add_note_once(thread, state, call.id, args)
             else:
-                output = read_call(
-                    SPECS[name][0],
-                    **args,
-                    actor=state["actor"],
-                )
-
+                output = read_call(SPECS[name][0], **args, actor=state["actor"])
         except (ValueError, TypeError) as exc:
-            output = {
-                "error": "INVALID_ARGUMENTS",
-                "message": str(exc),
-            }
-
-        state["messages"].append({
-            "role": "tool",
-            "tool_call_id": call.id,
-            "content": json.dumps(output, ensure_ascii=False),
-        })
+            output = {"error": "INVALID_ARGUMENTS", "message": str(exc)}
+        if output.get("allowed") is False:
+            reason = str(output.get("reason", "Action is not allowed."))
+            if reason not in state.setdefault("outcomes", []):
+                state["outcomes"].append(reason)
+        if output.get("error") == "ERR_FORBIDDEN":
+            output["message"] += " Stop: do not try other tools for this person."
+            # Terminate this turn in code. Even a noncompliant model cannot cause
+            # a second forbidden call. Other requested work is explicitly unresolved.
+            stop_message = localized(state, "Access refused. ", "تم رفض الوصول. ") + output["message"] + localized(state, " Other requested work has not been completed.", " بقية الأعمال المطلوبة لم تكتمل.")
+        state["messages"].append({"role": "tool", "tool_call_id": call.id,
+                                  "content": json.dumps(output, ensure_ascii=False)})
+        if stop_message:
+            return respond_and_save(thread, state, "done", stop_message)
         save(thread, state)
-
-    return response(
-        "error",
-        "Tool-call limit reached. Check saved tool results before retrying.",
-    )
+    return respond_and_save(thread, state, "error", "Tool-call limit reached. Remaining work is unresolved; check saved results before retrying.")
 
 
 def dispatch(options):
@@ -727,6 +790,8 @@ def dispatch(options):
             "content": options.message,
         })
 
+    state["outcomes"] = []
+    state["resolved"] = []
     state.pop("last_response", None)
     save(options.thread, state)
     return run_agent(options.thread, state)

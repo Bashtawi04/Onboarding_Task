@@ -108,21 +108,20 @@ CLI identities are simulated for this exercise, not production authentication.
 These controls have targeted test coverage. They do not establish a
 universal exactly-once guarantee across every tool and failure mode.
 
-## 📊 Verification snapshot
+## 📊 Verification — 8 November 2026
 
-| Check | Observed result |
-|---|---:|
-| Public scenarios: 8 cases × 3 repetitions | ✅ **24/24** |
-| Additional scenarios: 4 cases × 3 repetitions | ✅ **12/12** |
-| Local approval and recovery unit tests | ✅ **20/20** |
-| Same unit suite in a clean exported copy | ✅ **20/20** |
-| Safety violations reported in successful scenario runs | ✅ **0** |
+| Revision | Evidence | Result |
+|---|---|---|
+| Original submission | Mentor reproduced public and additional evaluations | 24/24 + 12/12 live runs; 20/20 units |
+| First review update | Uploaded live reports and Windows terminal output | 42/42 live runs; 38/38 units; 0 reported safety violations |
+| Current action-summary update | Offline regression suite | **42/42 unit tests** |
+| Current action-summary update | Public, additional and expanded review live suites | **Pending verification** |
 
-The public run preceded the final stdout encoding fix. The additional run
-completed after that fix with UTF-8 enabled. These are separate recorded
-evaluations, not a single run of one identical revision.
+Passing scenario checks did not catch every inaccurate sentence. The current
+update generates final action receipts from saved execution results, preserving
+human rejection reasons, recorded status and correct appointment weekdays.
 
-See [the evaluation report](RESULTS.md) for evidence and limitations.
+[Full results and evidence](RESULTS.md) · [Review notes](REVIEW_FIXES.md)
 
 ---
 
@@ -178,7 +177,7 @@ This makes a **billable model request**:
 ### 1. Local unit tests — no Azure calls
 
 ```powershell
-.\.venv\Scripts\python.exe -X utf8 -m unittest discover -s tests -p test_approval.py -v
+.\.venv\Scripts\python.exe -X utf8 -m unittest discover -s tests -v
 ```
 
 ### 2. Public scenarios — Azure calls are billed
@@ -259,64 +258,100 @@ The supplied checker remains unchanged.
 
 - Identity is simulated; production authentication is not implemented.
 - The backend is a mock system and the interface is command-line only.
-- General requests requiring multiple approved actions need further verification.
+- Multi-action continuation passed the first review live suite. Live verification of the current action-summary update remains pending.
 - Task-note duplicate tracking covers exact arguments within one thread.
-- Model-written explanations can vary and include unnecessary contract context.
-- Hidden-test results and independent peer review are not part of these scores.
+- Model-written explanations can still vary or include unsolicited offers. The rigid prompt-only promise of no follow-up offers was removed; this cosmetic behaviour is not guaranteed.
+- Mentor review on 8 November reproduced the original scores and reported 17/18 unseen runs passing. Those scores do not validate this revised code.
 - Phase 1 RAG and Phase 2 actions remain separate workflows.
 
 ## 📌 Review status
 
-Implementation, recorded evaluations, setup documentation and clean-copy
-unit verification are available. Peer review, mentor evaluation and the
-demonstration are separate delivery steps.
+Mentor review has been received and fixes are in progress. See `REVIEW_FIXES.md` for the revised validation and remaining steps. A review of a teammate's PR and the demonstration remain separate delivery steps.
 
-## 🏗️ Architecture: from a request to a controlled action
+## 🔄 Request and approval flow
 
-### Components and responsibilities
+```mermaid
+flowchart TD
+    A[User request] --> B[Model selects a tool]
+    B --> C[Python validation and PeopleHub checks]
+    C --> D{Action type}
+    D -->|Read or permitted note| E[Tool result]
+    D -->|Approval required| F[Save pending proposal]
+    F --> G{Eligible human decision}
+    G -->|Approve or edit| H[Recheck and execute]
+    G -->|Reject| I[Record rejection]
+    H --> E
+    I --> E
+    E --> B
+    B -->|No further tool| J[Answer or recorded action receipt]
+```
 
-| Component | Responsibility |
-|---|---|
-| User and CLI (`agent_cli.py`) | Receive a request, simulated user identity and conversation/thread identifier. |
-| Azure-hosted language model | Interpret the request and select available tools through the OpenAI SDK. |
-| Pydantic argument models | Check argument types, allowed values and unexpected fields. Validation alone does not authorize an action. |
-| Python agent controller | Apply the approval workflow, preserve pending proposals and control execution. |
-| PeopleHub tools (`peoplehub/`) | Read mock onboarding records and enforce access and business rules for simulated writes. |
-| Persistent thread state | Preserve conversations, proposals and execution information across CLI processes. |
-| Human approver | Approve, reject or edit an eligible pending proposal. |
-| Evaluation harness and tests | Check replies, approval behavior, actual database effects and recovery behavior. |
+Every new sensitive action requires its own approval. The controller records
+an action's outcome before asking the model to continue, so a model connection
+failure can be retried without replaying the completed write.
 
-### Request and approval flow
+## Mentor-review revision: continuation and recipient handling
 
-1. **Receive:** The CLI receives the user's message and simulated identity.
-2. **Investigate:** The model selects read tools to obtain relevant PeopleHub records.
-3. **Validate:** Python validates tool arguments; PeopleHub checks access and business rules.
-4. **Choose a path:**
-   - Read-only request: return an answer grounded in retrieved records.
-   - Permitted task note: perform the low-risk write without an approval request.
-   - Action requiring approval: save a proposal and return `awaiting_approval`. The proposed write has not happened.
-   - Disallowed action: explain the restriction.
-5. **Human decision:** A later `resume` command supplies the decision and approver identity. Python checks whether that person is eligible.
-6. **Recheck:** For a newly approved or edited proposal, validate the permitted changes and recheck the applicable rules.
-7. **Execute:** Save execution information before the approved write. Retryable service failures receive at most one retry using the same idempotency key.
-8. **Report:** Save and return the actual outcome. Rejection and failed execution are reported explicitly.
+After an approve, reject or failed action, the agent records the tool result and
+continues the original conversation. Resolved actions cannot be proposed again
+within the same user request. A new `say` starts a new request.
 
-### Example: an IT account and a laptop
+If a model call fails after a write, the response preserves the completed outcome
+and explicitly says remaining actions are unresolved. Repeat `resume` to continue;
+the completed write is not replayed. Each `resume` answers the CURRENT proposal:
+inspect the returned pending action before sending another approval.
 
-If the recorded contract is still blocked, a claim that HR approved it by phone does not satisfy the IT account prerequisite.
+Human messages show employee names, action details and approver names. JSON
+arguments remain in `pending` for the harness. Approver display names use the
+supplied seed directory, with the live manager name preferred; names do not grant
+permission. IDs from live PeopleHub checks remain authoritative.
 
-The agent explains why the account cannot proceed. A laptop request may still proceed through its own eligibility and human-approval checks. Approval does not override an unmet business rule.
+Emails to the hire must use the recorded work email. For another recipient,
+this revision conservatively requires the user to specify the exact address;
+a team name alone may need clarification. API address restrictions still apply.
+An approver cannot silently redirect an email to a different recipient.
 
-### Trust boundaries
+Arabic requests receive Arabic approval/status labels. Proper names, API reasons,
+and some operational labels may remain English; complete localization is not claimed.
 
-- Model-generated arguments and user statements are not proof of authorization.
-- The model does not choose the identity of the person approving a proposal.
-- Human approval and business-rule eligibility are separate checks.
-- CLI identities are simulated for this exercise; production authentication is outside this implementation.
-- PeopleHub is a mock system: these actions do not alter real HR records or send real email.
+A forbidden read ends the current turn in code. This prevents a second forbidden
+API attempt, but also stops unrelated work in that turn and reports it as unresolved.
 
-### How this relates to Phase 1
+While approval is pending, `say` returns the existing proposal: requesters cannot
+cancel it with conversational text. An eligible approver must use `resume --decision reject`.
+The agent has no tool for cancelling a request that is already executed.
 
-Phase 1 retrieves supporting information and generates an answer.
+### Linux and macOS
 
-Phase 2 reads operational records and performs controlled actions through tools, with human approval where required. The two workflows live in the same repository; Phase 2 does not integrate the Phase 1 retrieval pipeline.
+Run from `phase2` (Python 3.12 recommended):
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+cp .env.example .env  # first setup only; enter credentials locally
+python -m unittest discover -s tests -v
+```
+
+Live runs use Azure and are billed:
+
+```bash
+python harness/run_scenarios.py --track onboarding --agent "python agent_cli.py" --scenarios scenarios/onboarding_public.jsonl --repeat 3 --out results-public-review.json
+python harness/run_scenarios.py --track onboarding --agent "python agent_cli.py" --scenarios scenarios/onboarding_own.jsonl --repeat 3 --out results-own-review.json
+python harness/run_scenarios.py --track onboarding --agent "python agent_cli.py" --scenarios scenarios/onboarding_review.jsonl --repeat 3 --out results-review-new.json
+```
+
+## 📋 Accurate action receipts
+
+After a turn resolves approved or rejected actions, the final receipt uses
+saved outcomes instead of a model-written paraphrase. Human rejection is
+attributed to the approver; request IDs and status come from PeopleHub;
+appointment weekdays are calculated from the returned date.
+
+Read-only turns still use model answers. For mixed requests, the final receipt
+covers recorded actions; ask separate informational questions in their own
+message. It does not claim every possible part of a request was answered.
+
+The 22 conversation tests in [test_conversation.py](tests/test_conversation.py)
+include deliberately misleading model replies. The 20 approval and recovery
+tests remain in [test_approval.py](tests/test_approval.py).

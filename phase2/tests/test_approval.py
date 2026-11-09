@@ -233,18 +233,17 @@ class ApprovalTests(unittest.TestCase):
             ).fetchone()[0]
         self.assertEqual(count, 1)
 
-    def test_contract_blocker_survives_laptop_success(self):
+    def test_laptop_does_not_add_unrequested_contract_context(self):
         self.actor = "E1007"
         self.state = self.proposal("propose_it_request", {
             "new_hire_id": "NH-2609",
             "kind": "laptop",
             "note": "Laptop requested",
         })
-        self.assertIn("contract", self.state["pending"]["summary"])
+        self.assertNotIn("contract", self.state["pending"]["summary"])
 
         result = self.decide(by="E1007")
-        self.assertIn("contract", result["message"])
-        self.assertIn("Blocked", result["message"])
+        self.assertNotIn("contract", result["message"])
 
         with closing(core.connect()) as conn:
             rows = conn.execute(
@@ -253,7 +252,7 @@ class ApprovalTests(unittest.TestCase):
             ).fetchall()
         self.assertEqual([row[0] for row in rows], ["laptop"])
 
-    def test_contract_context_uses_record_for_other_hire(self):
+    def test_other_laptop_does_not_add_unrequested_contract_context(self):
         self.actor = "E1084"
         self.state = self.proposal("propose_it_request", {
             "new_hire_id": "NH-2610",
@@ -261,7 +260,7 @@ class ApprovalTests(unittest.TestCase):
             "note": "Laptop requested",
         })
         summary = self.state["pending"]["summary"]
-        self.assertIn("Not started", summary)
+        self.assertNotIn("Not started", summary)
         self.assertNotIn("Blocked", summary)
 
     def test_email(self):
