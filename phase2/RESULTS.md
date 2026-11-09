@@ -2,7 +2,7 @@
 
 **Yahya AlBashtawi · Cerebrum · Phase 2 · Updated 8 November 2026**
 
-[Project overview](README.md) · [Review notes](REVIEW_FIXES.md)
+[Project overview](README.md) · [Review notes](CHANGELOG.md)
 
 ## ✅ Current status
 
@@ -28,9 +28,9 @@ The private unseen suite has not been rerun here.
 |---|---|
 | [Original public results](results-public-repeat3.json) | Original submission |
 | [Original additional results](results-own-repeat3-utf8.json) | Original submission |
-| [Public rerun](results-mentor-public.json) | First review update |
-| [Additional rerun](results-mentor-own.json) | First review update |
-| [Workflow rerun](results-mentor-review.json) | First review update |
+| [Public rerun](results-public-baseline.json) | First review update |
+| [Additional rerun](results-additional-baseline.json) | First review update |
+| [Workflow rerun](results-workflow-baseline.json) | First review update |
 
 Original public and additional reports were generated at different development
 points around the Windows encoding fix. They are preserved as historical evidence.
@@ -86,6 +86,6 @@ Run from phase2 with the existing configured environment. All unit tests:
 ```
 
 For each suite (public, own, review), use the harness instructions in README.
-Save current outputs as results-public-checks.json, results-own-checks.json and
-results-review-checks.json. Inspect every reply and summary before replacing
+Save current outputs as results-public-latest.json, results-additional-latest.json and
+results-workflow-latest.json. Inspect every reply and summary before replacing
 pending entries with verified scores. Live runs use billable Azure requests.

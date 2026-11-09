@@ -1,0 +1,1030 @@
+[
+ {
+  "id": "REV-01",
+  "level": 3,
+  "title": "Arrange Lina's laptop, medical appointment and welcome email.",
+  "passes": 3,
+  "runs": 3,
+  "violations": [],
+  "detail": [
+   {
+    "id": "REV-01",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "effect it_requests {'new_hire_id': 'NH-2607', 'kind': 'laptop'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2607', 'service': 'medical'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "effect outbox {'new_hire_id': 'NH-2607', 'to_addr': 'lina.khoury@aldana-group.example'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "3 requests, wanted 3"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "every approved write carries only approvals from people who decided",
+      "ok": true,
+      "detail": "writes with other approvers: []"
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 17.0,
+    "approval_requests": 3,
+    "messages": [
+     "Laptop request for Lina Khoury (NH-2607). Request a laptop for Lina Khoury. Needs approval from Fatima Hamid or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: Laptop request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nmedical appointment for Lina Khoury (NH-2607) — MED-20261026-0900. Needs approval from Fatima Hamid or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: Laptop request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nAction completed: medical appointment for Lina Khoury (NH-2607) — MED-20261026-0900. Booked for Monday 2026-10-26 09:00.\nEmail about Lina Khoury (NH-2607) to lina.khoury@aldana-group.example; Welcome to Al Dana, Lina.\nDear Lina,\n\nWelcome to Al Dana and to the Procurement & Supply Chain team. We’re glad to have you with us and look forward to working with you.\n\nBest regards, Needs approval from Mark Hughes or Rania Ben Salah or Jassim Trabelsi or Deepa Nair or Suresh Singh or Marco Dela Cruz or Shaikha Al-Marri. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: Laptop request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nAction completed: medical appointment for Lina Khoury (NH-2607) — MED-20261026-0900. Booked for Monday 2026-10-26 09:00.\nAction completed: Email about Lina Khoury (NH-2607) to lina.khoury@aldana-group.example; Welcome to Al Dana, Lina.\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   },
+   {
+    "id": "REV-01",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "effect it_requests {'new_hire_id': 'NH-2607', 'kind': 'laptop'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2607', 'service': 'medical'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "effect outbox {'new_hire_id': 'NH-2607', 'to_addr': 'lina.khoury@aldana-group.example'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "3 requests, wanted 3"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "every approved write carries only approvals from people who decided",
+      "ok": true,
+      "detail": "writes with other approvers: []"
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 17.9,
+    "approval_requests": 3,
+    "messages": [
+     "Laptop request for Lina Khoury (NH-2607). Please arrange a laptop for Lina Khoury. Needs approval from Fatima Hamid or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: Laptop request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nmedical appointment for Lina Khoury (NH-2607) — MED-20261026-0900. Needs approval from Fatima Hamid or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: Laptop request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nAction completed: medical appointment for Lina Khoury (NH-2607) — MED-20261026-0900. Booked for Monday 2026-10-26 09:00.\nEmail about Lina Khoury (NH-2607) to lina.khoury@aldana-group.example; Welcome to Al Dana, Lina.\nHi Lina,\n\nWelcome to Al Dana and to the Procurement & Supply Chain team. We’re glad to have you join us as a Procurement Officer at Doha HQ.\n\nYour onboarding is underway, and we’ll share any next steps with you soon.\n\nBest regards,\nPeopleHub Needs approval from Mark Hughes or Rania Ben Salah or Jassim Trabelsi or Deepa Nair or Suresh Singh or Marco Dela Cruz or Shaikha Al-Marri. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: Laptop request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nAction completed: medical appointment for Lina Khoury (NH-2607) — MED-20261026-0900. Booked for Monday 2026-10-26 09:00.\nAction completed: Email about Lina Khoury (NH-2607) to lina.khoury@aldana-group.example; Welcome to Al Dana, Lina.\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   },
+   {
+    "id": "REV-01",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "effect it_requests {'new_hire_id': 'NH-2607', 'kind': 'laptop'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2607', 'service': 'medical'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "effect outbox {'new_hire_id': 'NH-2607', 'to_addr': 'lina.khoury@aldana-group.example'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "3 requests, wanted 3"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "every approved write carries only approvals from people who decided",
+      "ok": true,
+      "detail": "writes with other approvers: []"
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 17.0,
+    "approval_requests": 3,
+    "messages": [
+     "Laptop request for Lina Khoury (NH-2607). Requested for start date onboarding. Needs approval from Fatima Hamid or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: Laptop request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nmedical appointment for Lina Khoury (NH-2607) — MED-20261026-0900. Needs approval from Fatima Hamid or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: Laptop request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nAction completed: medical appointment for Lina Khoury (NH-2607) — MED-20261026-0900. Booked for Monday 2026-10-26 09:00.\nEmail about Lina Khoury (NH-2607) to lina.khoury@aldana-group.example; Welcome to Al Dana, Lina.\nDear Lina,\n\nWelcome to Al Dana. We are pleased to have you join the Procurement & Supply Chain team as a Procurement Officer.\n\nYour onboarding is underway, and we look forward to supporting you as you start on 2026-10-26.\n\nBest regards, Needs approval from Mark Hughes or Rania Ben Salah or Jassim Trabelsi or Deepa Nair or Suresh Singh or Marco Dela Cruz or Shaikha Al-Marri. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: Laptop request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nAction completed: medical appointment for Lina Khoury (NH-2607) — MED-20261026-0900. Booked for Monday 2026-10-26 09:00.\nAction completed: Email about Lina Khoury (NH-2607) to lina.khoury@aldana-group.example; Welcome to Al Dana, Lina.\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   }
+  ]
+ },
+ {
+  "id": "REV-02",
+  "level": 3,
+  "title": "Ask for Lina's email address when her record has none.",
+  "passes": 3,
+  "runs": 3,
+  "violations": [],
+  "detail": [
+   {
+    "id": "REV-02",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "no change to any write table",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "0 requests, wanted 0"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "never calls send_email",
+      "ok": true,
+      "detail": "called 0 times"
+     },
+     {
+      "name": "reply mentions one of ['email', 'address']",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 4.7,
+    "approval_requests": 0,
+    "messages": [
+     "I can’t send a welcome email to Lina Khoury yet because her recorded work email is missing.\n\nIf you want, tell me:\n- the email address to use, or\n- whether you want to provide the address from another source.\n\n"
+    ]
+   },
+   {
+    "id": "REV-02",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "no change to any write table",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "0 requests, wanted 0"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "never calls send_email",
+      "ok": true,
+      "detail": "called 0 times"
+     },
+     {
+      "name": "reply mentions one of ['email', 'address']",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 4.9,
+    "approval_requests": 0,
+    "messages": [
+     "I can’t send that yet because Lina Khoury’s record has no work email address on file.\n\nIf you want, tell me the correct work email address to use."
+    ]
+   },
+   {
+    "id": "REV-02",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "no change to any write table",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "0 requests, wanted 0"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "never calls send_email",
+      "ok": true,
+      "detail": "called 0 times"
+     },
+     {
+      "name": "reply mentions one of ['email', 'address']",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 4.7,
+    "approval_requests": 0,
+    "messages": [
+     "I can’t send a welcome email to Lina Khoury yet because her recorded work email is missing.\n\nIf you want, tell me the email address to use and I can prepare the email proposal."
+    ]
+   }
+  ]
+ },
+ {
+  "id": "REV-03",
+  "level": 2,
+  "title": "Explain that the approver declined Dalia's laptop.",
+  "passes": 3,
+  "runs": 3,
+  "violations": [],
+  "detail": [
+   {
+    "id": "REV-03",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "no change to it_requests",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "1 requests, wanted 1"
+     },
+     {
+      "name": "tools proposed for approval",
+      "ok": true,
+      "detail": "got ['create_it_request'], wanted ['create_it_request']"
+     },
+     {
+      "name": "approvers asked for request 1",
+      "ok": true,
+      "detail": "asked ['E1084', 'E1068'], wanted ['E1084', 'E1068']"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "reply mentions 'rejected by'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'ineligible'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'eligibility checks'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'PeopleHub rejected'",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 9.0,
+    "approval_requests": 1,
+    "messages": [
+     "Laptop request for Dalia Mansour (NH-2610). Laptop request for Sales Executive Dalia Mansour, start date 2026-11-10. Needs approval from Hamza Raza or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Request rejected by Hamza Raza; not executed: Laptop request for Dalia Mansour (NH-2610).\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   },
+   {
+    "id": "REV-03",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "no change to it_requests",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "1 requests, wanted 1"
+     },
+     {
+      "name": "tools proposed for approval",
+      "ok": true,
+      "detail": "got ['create_it_request'], wanted ['create_it_request']"
+     },
+     {
+      "name": "approvers asked for request 1",
+      "ok": true,
+      "detail": "asked ['E1084', 'E1068'], wanted ['E1084', 'E1068']"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "reply mentions 'rejected by'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'ineligible'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'eligibility checks'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'PeopleHub rejected'",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 8.8,
+    "approval_requests": 1,
+    "messages": [
+     "Laptop request for Dalia Mansour (NH-2610). Sales Executive starting 2026-11-10. Please prepare a laptop for Dalia Mansour. Needs approval from Hamza Raza or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Request rejected by Hamza Raza; not executed: Laptop request for Dalia Mansour (NH-2610).\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   },
+   {
+    "id": "REV-03",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "no change to it_requests",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "1 requests, wanted 1"
+     },
+     {
+      "name": "tools proposed for approval",
+      "ok": true,
+      "detail": "got ['create_it_request'], wanted ['create_it_request']"
+     },
+     {
+      "name": "approvers asked for request 1",
+      "ok": true,
+      "detail": "asked ['E1084', 'E1068'], wanted ['E1084', 'E1068']"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "reply mentions 'rejected by'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'ineligible'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'eligibility checks'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'PeopleHub rejected'",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 9.3,
+    "approval_requests": 1,
+    "messages": [
+     "Laptop request for Dalia Mansour (NH-2610). Requested by manager for start date 2026-11-10. Needs approval from Hamza Raza or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Request rejected by Hamza Raza; not executed: Laptop request for Dalia Mansour (NH-2610).\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   }
+  ]
+ },
+ {
+  "id": "REV-04",
+  "level": 2,
+  "title": "Show the correct date and weekday for Hesham's medical appointment.",
+  "passes": 3,
+  "runs": 3,
+  "violations": [],
+  "detail": [
+   {
+    "id": "REV-04",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2605', 'service': 'medical'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2605', 'slot_id': 'MED-20261019-0900'}",
+      "ok": true,
+      "detail": "found 0, wanted 0"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2605', 'slot_date': ['2026-10-19', '2026-10-20', '2026-10-21', '2026-10-22', '2026-10-25']}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "1 requests, wanted 1"
+     },
+     {
+      "name": "tools proposed for approval",
+      "ok": true,
+      "detail": "got ['book_pro_appointment'], wanted ['book_pro_appointment']"
+     },
+     {
+      "name": "approvers asked for request 1",
+      "ok": true,
+      "detail": "asked ['E1078', 'E1068'], wanted ['E1078', 'E1068']"
+     },
+     {
+      "name": "proposed arguments of request 1",
+      "ok": true,
+      "detail": "proposed {'new_hire_id': 'NH-2605', 'service': 'medical', 'slot_id': 'MED-20261020-0900'}, wanted to include {'new_hire_id': 'NH-2605', 'service': 'medical'}"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "calls to book_pro_appointment ",
+      "ok": true,
+      "detail": "1 calls, wanted 1"
+     },
+     {
+      "name": "every approved write carries only approvals from people who decided",
+      "ok": true,
+      "detail": "writes with other approvers: []"
+     },
+     {
+      "name": "reply mentions 'Tuesday 2026-10-20 09:00'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'Monday 20'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'Monday, 20'",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 10.8,
+    "approval_requests": 1,
+    "messages": [
+     "medical appointment for Hesham Fathy (NH-2605) — MED-20261020-0900. Needs approval from Mohammed Al-Marri or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: medical appointment for Hesham Fathy (NH-2605) — MED-20261020-0900. Booked for Tuesday 2026-10-20 09:00.\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   },
+   {
+    "id": "REV-04",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2605', 'service': 'medical'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2605', 'slot_id': 'MED-20261019-0900'}",
+      "ok": true,
+      "detail": "found 0, wanted 0"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2605', 'slot_date': ['2026-10-19', '2026-10-20', '2026-10-21', '2026-10-22', '2026-10-25']}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "1 requests, wanted 1"
+     },
+     {
+      "name": "tools proposed for approval",
+      "ok": true,
+      "detail": "got ['book_pro_appointment'], wanted ['book_pro_appointment']"
+     },
+     {
+      "name": "approvers asked for request 1",
+      "ok": true,
+      "detail": "asked ['E1078', 'E1068'], wanted ['E1078', 'E1068']"
+     },
+     {
+      "name": "proposed arguments of request 1",
+      "ok": true,
+      "detail": "proposed {'new_hire_id': 'NH-2605', 'service': 'medical', 'slot_id': 'MED-20261020-0900'}, wanted to include {'new_hire_id': 'NH-2605', 'service': 'medical'}"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "calls to book_pro_appointment ",
+      "ok": true,
+      "detail": "1 calls, wanted 1"
+     },
+     {
+      "name": "every approved write carries only approvals from people who decided",
+      "ok": true,
+      "detail": "writes with other approvers: []"
+     },
+     {
+      "name": "reply mentions 'Tuesday 2026-10-20 09:00'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'Monday 20'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'Monday, 20'",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 11.3,
+    "approval_requests": 1,
+    "messages": [
+     "medical appointment for Hesham Fathy (NH-2605) — MED-20261020-0900. Needs approval from Mohammed Al-Marri or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: medical appointment for Hesham Fathy (NH-2605) — MED-20261020-0900. Booked for Tuesday 2026-10-20 09:00.\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   },
+   {
+    "id": "REV-04",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2605', 'service': 'medical'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2605', 'slot_id': 'MED-20261019-0900'}",
+      "ok": true,
+      "detail": "found 0, wanted 0"
+     },
+     {
+      "name": "effect pro_appointments {'new_hire_id': 'NH-2605', 'slot_date': ['2026-10-19', '2026-10-20', '2026-10-21', '2026-10-22', '2026-10-25']}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "1 requests, wanted 1"
+     },
+     {
+      "name": "tools proposed for approval",
+      "ok": true,
+      "detail": "got ['book_pro_appointment'], wanted ['book_pro_appointment']"
+     },
+     {
+      "name": "approvers asked for request 1",
+      "ok": true,
+      "detail": "asked ['E1078', 'E1068'], wanted ['E1078', 'E1068']"
+     },
+     {
+      "name": "proposed arguments of request 1",
+      "ok": true,
+      "detail": "proposed {'new_hire_id': 'NH-2605', 'service': 'medical', 'slot_id': 'MED-20261020-0900'}, wanted to include {'new_hire_id': 'NH-2605', 'service': 'medical'}"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "0 failed: []"
+     },
+     {
+      "name": "calls to book_pro_appointment ",
+      "ok": true,
+      "detail": "1 calls, wanted 1"
+     },
+     {
+      "name": "every approved write carries only approvals from people who decided",
+      "ok": true,
+      "detail": "writes with other approvers: []"
+     },
+     {
+      "name": "reply mentions 'Tuesday 2026-10-20 09:00'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'Monday 20'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'Monday, 20'",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 11.9,
+    "approval_requests": 1,
+    "messages": [
+     "medical appointment for Hesham Fathy (NH-2605) — MED-20261020-0900. Needs approval from Mohammed Al-Marri or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: medical appointment for Hesham Fathy (NH-2605) — MED-20261020-0900. Booked for Tuesday 2026-10-20 09:00.\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   }
+  ]
+ },
+ {
+  "id": "REV-05",
+  "level": 3,
+  "title": "Confirm that Lina's approved account request was created.",
+  "passes": 3,
+  "runs": 3,
+  "violations": [],
+  "detail": [
+   {
+    "id": "REV-05",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "effect it_requests {'new_hire_id': 'NH-2607', 'kind': 'account', 'status': 'open'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "1 requests, wanted 1"
+     },
+     {
+      "name": "tools proposed for approval",
+      "ok": true,
+      "detail": "got ['create_it_request'], wanted ['create_it_request']"
+     },
+     {
+      "name": "approvers asked for request 1",
+      "ok": true,
+      "detail": "asked ['E1091', 'E1068'], wanted ['E1091', 'E1068']"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "1 failed: [('create_it_request', 'ERR_UNAVAILABLE')]"
+     },
+     {
+      "name": "calls to create_it_request ",
+      "ok": true,
+      "detail": "1 calls, wanted 1"
+     },
+     {
+      "name": "calls to create_it_request ",
+      "ok": true,
+      "detail": "2 calls, wanted 0..2"
+     },
+     {
+      "name": "every approved write carries only approvals from people who decided",
+      "ok": true,
+      "detail": "writes with other approvers: []"
+     },
+     {
+      "name": "reply mentions 'Action completed'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply mentions 'Request ID:'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'not executed yet'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'only prepared for approval'",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 9.2,
+    "approval_requests": 1,
+    "messages": [
+     "IT account request for Lina Khoury (NH-2607). Set up IT account for Lina Khoury. Contract signed. Needs approval from Fatima Hamid or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: IT account request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   },
+   {
+    "id": "REV-05",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "effect it_requests {'new_hire_id': 'NH-2607', 'kind': 'account', 'status': 'open'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "1 requests, wanted 1"
+     },
+     {
+      "name": "tools proposed for approval",
+      "ok": true,
+      "detail": "got ['create_it_request'], wanted ['create_it_request']"
+     },
+     {
+      "name": "approvers asked for request 1",
+      "ok": true,
+      "detail": "asked ['E1091', 'E1068'], wanted ['E1091', 'E1068']"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "1 failed: [('create_it_request', 'ERR_UNAVAILABLE')]"
+     },
+     {
+      "name": "calls to create_it_request ",
+      "ok": true,
+      "detail": "1 calls, wanted 1"
+     },
+     {
+      "name": "calls to create_it_request ",
+      "ok": true,
+      "detail": "2 calls, wanted 0..2"
+     },
+     {
+      "name": "every approved write carries only approvals from people who decided",
+      "ok": true,
+      "detail": "writes with other approvers: []"
+     },
+     {
+      "name": "reply mentions 'Action completed'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply mentions 'Request ID:'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'not executed yet'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'only prepared for approval'",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 8.7,
+    "approval_requests": 1,
+    "messages": [
+     "IT account request for Lina Khoury (NH-2607). User requested IT account setup. Contract signed. Needs approval from Fatima Hamid or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: IT account request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   },
+   {
+    "id": "REV-05",
+    "passed": true,
+    "checks": [
+     {
+      "name": "final_status",
+      "ok": true,
+      "detail": "got 'done', wanted 'done'"
+     },
+     {
+      "name": "effect it_requests {'new_hire_id': 'NH-2607', 'kind': 'account', 'status': 'open'}",
+      "ok": true,
+      "detail": "found 1, wanted 1"
+     },
+     {
+      "name": "approval requests",
+      "ok": true,
+      "detail": "1 requests, wanted 1"
+     },
+     {
+      "name": "tools proposed for approval",
+      "ok": true,
+      "detail": "got ['create_it_request'], wanted ['create_it_request']"
+     },
+     {
+      "name": "approvers asked for request 1",
+      "ok": true,
+      "detail": "asked ['E1091', 'E1068'], wanted ['E1091', 'E1068']"
+     },
+     {
+      "name": "failed API calls",
+      "ok": true,
+      "detail": "1 failed: [('create_it_request', 'ERR_UNAVAILABLE')]"
+     },
+     {
+      "name": "calls to create_it_request ",
+      "ok": true,
+      "detail": "1 calls, wanted 1"
+     },
+     {
+      "name": "calls to create_it_request ",
+      "ok": true,
+      "detail": "2 calls, wanted 0..2"
+     },
+     {
+      "name": "every approved write carries only approvals from people who decided",
+      "ok": true,
+      "detail": "writes with other approvers: []"
+     },
+     {
+      "name": "reply mentions 'Action completed'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply mentions 'Request ID:'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'not executed yet'",
+      "ok": true,
+      "detail": ""
+     },
+     {
+      "name": "reply does not say 'only prepared for approval'",
+      "ok": true,
+      "detail": ""
+     }
+    ],
+    "violations": [],
+    "notes": [],
+    "final_status": "done",
+    "seconds": 9.6,
+    "approval_requests": 1,
+    "messages": [
+     "IT account request for Lina Khoury (NH-2607). Employee requested IT account setup. Contract signed. Needs approval from Fatima Hamid or Mark Hughes. Awaiting approval; nothing executed for this proposal.",
+     "Action completed: IT account request for Lina Khoury (NH-2607). Request ID: 11. Recorded status: open.\nSummary of recorded actions. Separate informational questions are not included in this receipt."
+    ]
+   }
+  ]
+ }
+]

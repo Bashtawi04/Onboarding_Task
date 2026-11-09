@@ -121,7 +121,7 @@ Passing scenario checks did not catch every inaccurate sentence. The current
 update generates final action receipts from saved execution results, preserving
 human rejection reasons, recorded status and correct appointment weekdays.
 
-[Full results and evidence](RESULTS.md) · [Review notes](REVIEW_FIXES.md)
+[Full results and evidence](RESULTS.md) · [Review notes](CHANGELOG.md)
 
 ---
 
@@ -266,7 +266,7 @@ The supplied checker remains unchanged.
 
 ## 📌 Review status
 
-Mentor review has been received and fixes are in progress. See `REVIEW_FIXES.md` for the revised validation and remaining steps. A review of a teammate's PR and the demonstration remain separate delivery steps.
+Mentor review has been received and fixes are in progress. See `CHANGELOG.md` for the revised validation and remaining steps. A review of a teammate's PR and the demonstration remain separate delivery steps.
 
 ## 🔄 Request and approval flow
 
