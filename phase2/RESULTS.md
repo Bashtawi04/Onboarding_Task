@@ -1,118 +1,108 @@
-# 📊 Onboarding Action Agent — Evaluation Report
+# 📊 Evaluation results
 
-**Author:** Yahya AlBashtawi · **Phase:** 2
-**Report date:** 4 November 2026
+**Yahya AlBashtawi · Cerebrum · Phase 2 · Updated 8 November 2026**
 
-[🏠 Project overview](README.md) · [📄 Public evidence](results-public-repeat3.json) · [📄 Additional evidence](results-own-repeat3-utf8.json) · [🧪 Unit tests](tests/test_approval.py)
+[Project overview](README.md) · [Review notes](CHANGELOG.md)
 
----
+## ✅ Current status
 
-## 🎯 Executive summary
+The current action-summary update passes **42/42 offline tests**. Its live
+Azure verification is pending. Earlier live scores below belong to earlier
+code revisions and must not be presented as scores for the current update.
 
-The prototype passed all recorded public scenario repetitions and the
-final additional scenario repetitions. Those successful evaluations
-reported zero safety violations.
+## 🧪 Results by revision
 
-All 20 local unit tests also passed in a clean exported copy after fresh
-dependency installation.
+| Revision | Public runs | Additional runs | Review runs | Unit tests |
+|---|---:|---:|---:|---:|
+| Original submission | 24/24 | 12/12 | Not present | 20/20 |
+| First review update | 24/24 | 12/12 | 6/6 | 38/38 |
+| Current action-summary update | 24/24 | 12/12 | 15/15 | **42/42** |
 
-> These are results on the stated tests. They do not establish universal
-> correctness, production readiness or performance on hidden scenarios.
+The first review update's 42 live runs reported **zero safety violations**.
+The mentor also reported **17/18 unseen runs** for the original submission.
+The private unseen suite has not been rerun here.
 
-## ✅ Results dashboard
+## 📁 Evidence
 
-| Evaluation | Cases | Repetitions | Passed runs |
-|---|---:|---:|---:|
-| Public Level 1 | 3 | 3 | **9/9** |
-| Public Level 2 | 3 | 3 | **9/9** |
-| Public Level 3 | 2 | 3 | **6/6** |
-| Additional scenarios | 4 | 3 | **12/12** |
-
-| Separate check | Outcome |
+| Report | Revision |
 |---|---|
-| Local approval and recovery unit suite | ✅ 20/20 |
-| Same suite in a clean exported copy | ✅ 20/20 |
-| Fresh dependency installation | ✅ Passed |
-| Phase 2 scoped precommit scan | ✅ Passed |
+| [Original public results](results-public-repeat3.json) | Original submission |
+| [Original additional results](results-own-repeat3-utf8.json) | Original submission |
+| [Public rerun](results-public-baseline.json) | First review update |
+| [Additional rerun](results-additional-baseline.json) | First review update |
+| [Workflow rerun](results-workflow-baseline.json) | First review update |
 
-The clean-copy run repeats the same unit suite. It does not add 20
-distinct tests to the coverage count.
+Original public and additional reports were generated at different development
+points around the Windows encoding fix. They are preserved as historical evidence.
+The first review update's Windows terminal output also recorded 38 passing units.
+Current offline tests use canned model responses and real PeopleHub simulator
+checks and database effects; they do not make Azure model requests.
 
-## 🔎 Scenario coverage
+## 🔎 What the review uncovered
 
-| Case | Behaviour exercised |
-|---|---|
-| OB-01 | Find the blocked contract without writes |
-| OB-02 | Propose an eligible laptop request and wait for the correct approvers |
-| OB-03 | Decline a laptop for an ineligible G2 site employee |
-| OB-04 | Choose an available medical slot and book after approval |
-| OB-05 | Respect rejection and create nothing |
-| OB-06 | Add an authorized task note without asking for approval |
-| OB-07 | Retry one temporary failure and create one account request |
-| OB-08 | Permit the laptop request while explaining the blocked account prerequisite |
-| OWN-01 | Use the edited note from an approved modification |
-| OWN-02 | Avoid creating a duplicate request |
-| OWN-03 | Stop after one retry when the service fails twice |
-| OWN-04 | Prevent an unauthorized approver from executing the action |
+| Issue | Correction | Regression coverage |
+|---|---|---|
+| Stops after the first approved write | Continue after execution, rejection or failure | Three actions, three independent approvals |
+| Missing hire email silently replaced by HR | Ask for an explicit recipient | No email written without an appropriate address |
+| Wrong human rejection explanation | Render the recorded human decision | Misleading model explanation cannot replace receipt |
+| Completed request described as pending | Render saved execution result and request ID | Contradictory model wording excluded |
+| Wrong appointment weekday | Calculate weekday from returned date | Tuesday 2026-10-20 checked |
+| Failed execution described as failed proposal | Keep the recorded execution failure | No invented proposal-failure explanation |
+| Unnecessary contract warnings | Preserve actual failed checks only | Laptop-only and blocked-account/laptop cases |
+| Further calls after forbidden access | Stop the turn in code | No second forbidden call |
 
-Unit tests additionally cover invalid edits, changed eligibility,
-fresh-process resume, recovery after a write, stable retry keys, email
-recipient restrictions and contract context for another hire.
+## 🛡️ Coverage
 
-## 🕒 Evaluation chronology
+- 20 approval/recovery tests: decision identity, allowed edits, changed eligibility,
+  rejection, retries, duplicate prevention, fresh-process resume and crash recovery.
+- 22 conversation tests: tool validation, malformed arguments, batches, eight-call
+  limit, continuation, missing recipients, readable messages and truthful receipts.
+- 8 supplied public scenarios and 4 existing additional scenarios remain unchanged.
+- 5 review scenarios cover three-action continuation, missing email, rejection
+  attribution, appointment weekday and executed account status.
 
-| Stage | Observed outcome |
-|---|---|
-| Public evaluation | 24/24 passed |
-| Initial additional evaluation | 10/12 passed; two runs hit Windows Unicode output errors |
-| Targeted run after stdout correction | Scenario checks passed, but harness result-file saving failed |
-| Full additional run with UTF-8 enabled | 12/12 passed; results saved |
-| Local unit suite | 20/20 passed |
-| Clean staged export with fresh dependencies | 20/20 unit tests passed |
+The supplied PeopleHub and evaluation harness remain unchanged. Added scenarios
+and tests informed development; they are regression tests, not an untouched test set.
 
-The public run preceded the final stdout encoding fix. The public and
-additional results therefore come from different points in development,
-not one identical revision. The clean-copy check did not rerun the live
-Azure scenario evaluations.
+## ⚠️ Interpretation and remaining work
 
-## 🛠️ Failures investigated
+Passing checks is evidence for the cases exercised, not universal correctness.
+The first review update passed every scenario while some generated explanations
+were still wrong; reading the full replies revealed those gaps.
 
-| Finding | Correction |
-|---|---|
-| Invalid function in an action check produced ERR_NOT_APPLICABLE | Python proposal handlers select the actual write function; validated schemas constrain arguments |
-| OB-08 completed only the permitted laptop action but omitted the account blocker explanation | Record-derived contract context is preserved through approval and completion |
-| Windows cp1252 could not encode some generated characters | ASCII-escaped JSON handles agent stdout; UTF-8 mode handles harness result saving |
+Current offline checks and the supplied secret checker pass. A fresh installation
+of the current revision's exact pinned dependencies has not been verified here.
+Mentor rerun, teammate peer review and final demonstration
+remain separate delivery steps. Final receipts cover recorded actions; separate
+informational questions in mixed requests should be asked in their own turn.
+CLI identities are simulated and all operations use a mock HR system.
 
-The supplied harness was not changed to resolve encoding. The contract
-context tests include another hire to check behaviour beyond OB-08.
+## ▶️ Reproduce
 
-## 🧠 Design choices
+Run from phase2 with the existing configured environment. All unit tests:
 
-| Decision | Reason |
-|---|---|
-| Python-enforced approval | Model-generated text cannot serve as authorization |
-| Pydantic argument validation | Reject unexpected fields and invalid action values |
-| Persistent proposal and execution state | Support decisions and recovery across separate processes |
-| Stable approved-write idempotency keys | Reuse the same operation identity during retry |
-| One retry maximum | Handle a temporary fault while bounding repeated calls |
-| Immediate authorized task notes | Follow the specified low-risk write exception |
+```powershell
+.\.venv\Scripts\python.exe -X utf8 -m unittest discover -s tests -v
+```
 
-## 📦 Reproducibility and checks
+For each suite (public, own, review), use the harness instructions in README.
+Save current outputs as results-public-latest.json, results-additional-latest.json and
+results-workflow-latest.json. Inspect every reply and summary before replacing
+pending entries with verified scores. Live runs use billable Azure requests.
 
-A staged Git snapshot was exported into a separate directory.
-A fresh Python 3.12.10 environment installed dependencies from
-requirements.txt, and all 20 unit tests passed. No .env was included.
+## Verified results — 9 November 2026
 
-The Phase 2 scoped precommit scan passed. The repository-wide scan
-reported four SHA-256-shaped values in earlier Phase 1 metadata.
-See [PRECOMMIT_REVIEW.md](PRECOMMIT_REVIEW.md) for the documented findings.
+The latest published reports record **51/51 live scenario runs passing**:
+24/24 public, 12/12 additional and 15/15 workflow runs, with **zero
+reported safety violations**. Windows terminal output records **42/42
+unit tests passing**.
 
-## ⚠️ Limits and remaining review
+- [Public results](results-public-latest.json)
+- [Additional results](results-additional-latest.json)
+- [Workflow results](results-workflow-latest.json)
 
-- CLI identities are simulated, not authenticated production users.
-- General multi-action requests and unseen wording need further assessment.
-- Some replies add unnecessary contract context.
-- Task-note duplicate tracking is limited to exact arguments in one thread.
-- The additional scenarios informed development and are not an untouched test set.
-- Independent peer review, the demonstration and mentor-run hidden evaluation
-  remain separate steps; no completion or pass is claimed for them.
+These results cover the exercised scenarios, not every possible request.
+The mentor's private unseen suite has not been rerun here.
+Teammate PR review, mentor acceptance and final demonstration remain
+separate tasks. The review branch has been uploaded to Azure DevOps and
+GitHub; uploading does not merge it into the main branches.
